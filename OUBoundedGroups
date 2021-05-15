@@ -1,0 +1,20 @@
+$events = Get-WinEvent -FilterHashtable @{logname="Security"; id=<EVENTID>} -MaxEvents 1
+
+# get the first event raw XML
+$event = [xml]$events[0].ToXml()
+
+# display its content
+$Name = $event.Event.EventData.Data | Where-Object {$_.name -eq "TargetUserName"}
+
+# pull hostname from xml
+$ComName = $name.'#text'
+
+
+# get distinguished name
+$OU = (Get-adcomputer $ComName).distinguishedname
+$HostName = (Get-adcomputer $ComName).SamAccountName
+
+# If in 
+If($OU -like '<ORGANIZATIONUNIT>' )
+
+   {Add-ADGroupMember <SECURITY-GROUP> -Members ($Hostname) }
