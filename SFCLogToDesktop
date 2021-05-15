@@ -1,0 +1,1 @@
+copy %windir%\logs\cbs\cbs.log %UserProfile%\desktop\Log.txt
