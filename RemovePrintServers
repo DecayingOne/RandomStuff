@@ -1,0 +1,2 @@
+$p = Get-Printer | where{$_.Name -like “*\\%PRINTSERVER%\*”}
+$p | Remove-Printer
